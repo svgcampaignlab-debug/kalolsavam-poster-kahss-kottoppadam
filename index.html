@@ -81,7 +81,7 @@
   <div class="cards">
     <div class="card">
       <div class="card-head"><span class="num">1</span><span class="ttl">ഇനം (Item)</span></div>
-      <label for="itemInput">ഇനത്തിന്റെ പേര് (മലയാളം മാത്രം)</label>
+      <label for="itemInput">ഇനത്തിന്റെ പേര്</label>
       <input type="text" id="itemInput" maxlength="24" placeholder="ഉദാ: മാപ്പിളപ്പാട്ട്" autocomplete="off">
       <div class="fs-row">
         <label class="fs-lab">ഫോണ്ട് സൈസ്</label>
@@ -105,7 +105,7 @@
 
     <div class="card">
       <div class="card-head"><span class="num">3</span><span class="ttl">പേര്</span></div>
-      <label for="nameInput">കുട്ടിയുടെ പേര് (മലയാളം)</label>
+      <label for="nameInput">കുട്ടിയുടെ പേര്</label>
       <input type="text" id="nameInput" maxlength="22" placeholder="ഉദാ: അനന്യ കുമാർ" autocomplete="off">
     </div>
 
@@ -236,16 +236,9 @@
     draw();
   };
 
-  function malOnly(id){
-    document.getElementById(id).addEventListener('input', e => {
-      const el=e.target, caret=el.selectionStart;
-      el.value = el.value.replace(/[^\u0D00-\u0D7F\s\u200C\u200D]/g,'');
-      try{ el.setSelectionRange(caret,caret); }catch(err){}
-      draw();
-    });
-  }
-  malOnly('itemInput');
-  malOnly('nameInput');
+  ['itemInput','nameInput'].forEach(id => {
+    document.getElementById(id).addEventListener('input', draw);
+  });
   document.getElementById('placeInput').addEventListener('change', draw);
 
   function bindSize(id){
